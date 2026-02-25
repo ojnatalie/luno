@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUNO — Sen, który czujesz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --brown-deep: #1a0f08;
+    --brown-dark: #2d1a0e;
+    --brown-mid: #4a2e1a;
+    --brown-warm: #6b3f22;
+    --amber: #c87941;
+    --amber-light: #e8a96a;
+    --amber-glow: #f5c87a;
+    --cream: #f5ede0;
+    --cream-light: #faf5ee;
+    --sand: #b8956a;
+    --text-light: #f0e4d0;
+    --text-muted: #a08060;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--brown-deep);
+    color: var(--text-light);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(26,15,8,0.95) 0%, transparent 100%);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 6px;
+    color: var(--cream);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--cream); }
+
+  .nav-cta {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--amber-light) !important;
+    border: 1px solid var(--amber-light);
+    padding: 10px 24px;
+    border-radius: 2px;
+    transition: all 0.3s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--amber-light);
+    color: var(--brown-deep) !important;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse 80% 60% at 50% 60%, #3d1f0a 0%, #1a0f08 60%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,121,65,0.18) 0%, rgba(200,121,65,0.06) 40%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    animation: breathe 5s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -30%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -30%) scale(1.08); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    padding: 0 40px;
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 32px;
+    animation: fadeUp 1s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(64px, 9vw, 130px);
+    font-weight: 300;
+    line-height: 0.92;
+    color: var(--cream-light);
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    animation: fadeUp 1s ease 0.15s both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--amber-glow);
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto 52px;
+    line-height: 1.8;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    animation: fadeUp 1s ease 0.45s both;
+  }
+
+  .btn-primary {
+    background: var(--amber);
+    color: var(--brown-deep);
+    border: none;
+    padding: 16px 40px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+
+  .btn-primary:hover {
+    background: var(--amber-glow);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(200,121,65,0.3);
+  }
+
+  .btn-ghost {
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s;
+  }
+
+  .btn-ghost:hover { color: var(--cream); }
+
+  .btn-ghost::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s;
+  }
+
+  .btn-ghost:hover::before { width: 40px; }
+
+  /* LUNO device illustration */
+  .hero-device {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    height: 310px;
+    animation: floatDevice 6s ease-in-out infinite;
+  }
+
+  @keyframes floatDevice {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-12px); }
+  }
+
+  .device-body {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 160px;
+    background: linear-gradient(160deg, #2a1a0e 0%, #1c1008 100%);
+    border-radius: 20px 20px 24px 24px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  .device-globe {
+    position: absolute;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 200px;
+    background: radial-gradient(ellipse at 40% 60%, rgba(245,200,120,0.95) 0%, rgba(230,160,80,0.85) 30%, rgba(180,100,40,0.6) 60%, rgba(100,50,20,0.2) 85%, transparent 100%);
+    border-radius: 50% 50% 40% 40%;
+    filter: blur(1px);
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.85; filter: blur(1px); }
+    50% { opacity: 1; filter: blur(0.5px); }
+  }
+
+  .device-glow-outer {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,121,65,0.2) 0%, rgba(200,121,65,0.05) 50%, transparent 70%);
+    animation: outerGlow 4s ease-in-out infinite;
+  }
+
+  @keyframes outerGlow {
+    0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+  }
+
+  .steam {
+    position: absolute;
+    bottom: 290px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .steam-line {
+    position: absolute;
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to top, rgba(255,255,255,0.15), transparent);
+    border-radius: 2px;
+    animation: steamRise 3s ease-in-out infinite;
+  }
+
+  .steam-line:nth-child(1) { left: -6px; animation-delay: 0s; }
+  .steam-line:nth-child(2) { left: 4px; animation-delay: 1s; height: 55px; }
+  .steam-line:nth-child(3) { left: 14px; animation-delay: 2s; }
+
+  @keyframes steamRise {
+    0% { opacity: 0; transform: translateY(0) scaleX(1); }
+    30% { opacity: 0.8; }
+    100% { opacity: 0; transform: translateY(-60px) scaleX(1.5); }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: fadeUp 1s ease 1.2s both;
+  }
+
+  .scroll-hint span {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--text-muted), transparent);
+    animation: scrollAnim 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollAnim {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 0.8; transform: scaleY(1.2); }
+  }
+
+  /* ─── TAGLINE STRIP ─── */
+  .tagline-strip {
+    background: var(--brown-dark);
+    padding: 28px 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(100,60,30,0.3);
+    border-bottom: 1px solid rgba(100,60,30,0.3);
+  }
+
+  .tagline-track {
+    display: flex;
+    gap: 60px;
+    white-space: nowrap;
+    animation: scrollLeft 20s linear infinite;
+  }
+
+  @keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .tagline-item {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .tagline-item::after {
+    content: '·';
+    color: var(--amber);
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 120px 60px; }
+
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+  }
+
+  /* ─── INTRO ─── */
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .intro-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 30px;
+  }
+
+  .intro-text h2 em {
+    font-style: italic;
+    color: var(--amber-light);
+  }
+
+  .intro-text p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .intro-text p strong {
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .intro-visual {
+    position: relative;
+    height: 500px;
+  }
+
+  .intro-card {
+    position: absolute;
+    background: rgba(45,26,14,0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(100,60,30,0.3);
+    border-radius: 16px;
+    padding: 28px;
+    transition: transform 0.4s;
+  }
+
+  .intro-card:hover { transform: translateY(-4px); }
+
+  .intro-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .intro-card p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(200,121,65,0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: var(--amber);
+    font-size: 16px;
+  }
+
+  .intro-card:nth-child(1) { top: 0; left: 0; width: 260px; }
+  .intro-card:nth-child(2) { top: 120px; right: 0; width: 240px; }
+  .intro-card:nth-child(3) { bottom: 20px; left: 40px; width: 280px; }
+
+  .intro-orb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,121,65,0.25) 0%, rgba(200,121,65,0.05) 60%, transparent 80%);
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  /* ─── FEATURES ─── */
+  .features {
+    background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(60,30,15,0.5) 0%, transparent 70%);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .features-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .features-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 6vw, 84px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+  }
+
+  .features-header h2 em {
+    font-style: italic;
+    color: var(--amber-light);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+  }
+
+  .feature-tile {
+    background: var(--brown-dark);
+    padding: 52px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+    cursor: default;
+  }
+
+  .feature-tile::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+
+  .feature-tile:hover { background: rgba(45,26,14,0.95); }
+  .feature-tile:hover::before { transform: scaleX(1); }
+
+  .feature-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: rgba(200,121,65,0.12);
+    line-height: 1;
+    margin-bottom: -20px;
+    letter-spacing: -3px;
+  }
+
+  .feature-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .feature-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* ─── INSIGHT SECTION ─── */
+  .insight-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--brown-dark);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .insight-visual {
+    background: radial-gradient(ellipse 100% 80% at 50% 80%, #3d200a 0%, #1a0e06 80%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .insight-lamp {
+    width: 140px;
+    height: 160px;
+    position: relative;
+  }
+
+  .lamp-globe-sm {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 130px;
+    background: radial-gradient(ellipse at 40% 60%, rgba(245,200,120,0.9) 0%, rgba(230,160,80,0.7) 35%, rgba(180,100,40,0.3) 70%, transparent 100%);
+    border-radius: 50% 50% 35% 35%;
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+
+  .lamp-base-sm {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 90px;
+    background: linear-gradient(160deg, #2a1a0e 0%, #1a0d07 100%);
+    border-radius: 14px 14px 18px 18px;
+  }
+
+  .lamp-glow-sm {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,121,65,0.2) 0%, transparent 70%);
+    animation: glowPulse 4s ease-in-out 0.5s infinite;
+  }
+
+  .lamp-text-sm {
+    position: absolute;
+    bottom: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: rgba(180,130,80,0.6);
+    white-space: nowrap;
+  }
+
+  .insight-text {
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .insight-text blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.2;
+    color: var(--cream);
+    margin-bottom: 36px;
+  }
+
+  .insight-text blockquote span {
+    color: var(--amber-light);
+    font-style: normal;
+  }
+
+  .insight-body {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-bottom: 40px;
+  }
+
+  .insight-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .stat-item {}
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .how {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .how-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .how-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 5vw, 70px);
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(100,60,30,0.2);
+  }
+
+  .step {
+    background: var(--brown-deep);
+    padding: 50px 36px;
+    position: relative;
+  }
+
+  .step-line {
+    position: absolute;
+    top: 66px;
+    right: -1px;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--amber), transparent);
+  }
+
+  .step:last-child .step-line { display: none; }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--amber);
+    letter-spacing: 2px;
+    margin-bottom: 28px;
+  }
+
+  .step-icon {
+    font-size: 32px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .step h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .step p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* ─── COLLECTIONS / MOODS ─── */
+  .moods {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .moods-header {
+    margin-bottom: 60px;
+  }
+
+  .moods-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 5vw, 70px);
+    font-weight: 300;
+    color: var(--cream);
+    max-width: 600px;
+    line-height: 1.1;
+  }
+
+  .mood-cards {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .mood-card {
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    group: true;
+  }
+
+  .mood-card-inner {
+    padding: 44px 36px;
+    position: relative;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: transform 0.4s;
+  }
+
+  .mood-card:hover .mood-card-inner {
+    transform: scale(1.01);
+  }
+
+  .mood-card:nth-child(1) .mood-card-inner {
+    background: linear-gradient(160deg, #3d1a08 0%, #1a0a04 100%);
+    min-height: 380px;
+  }
+
+  .mood-card:nth-child(2) .mood-card-inner {
+    background: linear-gradient(160deg, #2a2010 0%, #141008 100%);
+  }
+
+  .mood-card:nth-child(3) .mood-card-inner {
+    background: linear-gradient(160deg, #1a2020 0%, #0a1010 100%);
+  }
+
+  .mood-orb {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .mood-card:hover .mood-orb { opacity: 1; }
+
+  .mood-card:nth-child(1) .mood-orb {
+    background: radial-gradient(circle, rgba(245,180,80,0.8) 0%, rgba(200,100,40,0.3) 60%, transparent 80%);
+    width: 100px; height: 100px;
+  }
+
+  .mood-card:nth-child(2) .mood-orb {
+    background: radial-gradient(circle, rgba(180,160,100,0.8) 0%, rgba(140,120,60,0.3) 60%, transparent 80%);
+  }
+
+  .mood-card:nth-child(3) .mood-orb {
+    background: radial-gradient(circle, rgba(100,160,180,0.6) 0%, rgba(60,100,140,0.2) 60%, transparent 80%);
+  }
+
+  .mood-tag {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 12px;
+  }
+
+  .mood-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  .mood-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ─── COPY STRIP ─── */
+  .copy-strip {
+    text-align: center;
+    padding: 100px 60px;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(60,30,15,0.4) 0%, transparent 70%);
+  }
+
+  .copy-strip h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  .copy-strip h2 em {
+    font-style: italic;
+    color: var(--amber-light);
+    display: block;
+  }
+
+  .copy-strip p {
+    margin-top: 30px;
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+  }
+
+  /* ─── PROCESS (portfolio case) ─── */
+  .process {
+    max-width: 1100px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(100,60,30,0.25);
+    padding-top: 80px;
+  }
+
+  .process-header { margin-bottom: 60px; }
+
+  .process-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .process-item {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .process-num-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,121,65,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--amber);
+    flex-shrink: 0;
+  }
+
+  .process-item-text h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .process-item-text p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .tools-row {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(100,60,30,0.2);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .tool-tag {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px solid rgba(100,60,30,0.4);
+    padding: 8px 18px;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .tool-tag:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    text-align: center;
+    padding: 120px 60px;
+    background: linear-gradient(to bottom, var(--brown-deep), #120a04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,121,65,0.12) 0%, transparent 70%);
+    animation: breathe 5s ease-in-out infinite;
+  }
+
+  .cta-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 96px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.05;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .cta-section p {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 440px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+    position: relative;
+  }
+
+  .price-note {
+    display: inline-block;
+    margin-top: 28px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0e0806;
+    padding: 50px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(100,60,30,0.2);
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    letter-spacing: 6px;
+    color: var(--text-muted);
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: rgba(160,128,96,0.4);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 30px;
+  }
+
+  .footer-links a {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--cream); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 24px 30px; }
+    .nav-links { display: none; }
+    section { padding: 80px 30px; }
+    .intro { grid-template-columns: 1fr; gap: 60px; }
+    .intro-visual { height: 340px; }
+    .features-grid { grid-template-columns: 1fr; gap: 2px; }
+    .mood-cards { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .insight-section { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 24px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">LUNO</div>
+  <ul class="nav-links">
+    <li><a href="#features">Funkcje</a></li>
+    <li><a href="#how">Jak działa</a></li>
+    <li><a href="#moods">Tryby</a></li>
+    <li><a href="#process">Case study</a></li>
+    <li><a href="#cta" class="nav-cta">Zamów</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Inteligentne wsparcie snu</p>
+    <h1 class="hero-title">Wyciszenie<br><em>bez recepty</em></h1>
+    <p class="hero-subtitle">Światło, zapach i dźwięk — zsynchronizowane z Twoim rytmem snu. Naturalnie. Bez farmakologii.</p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-primary">Poznaj LUNO</a>
+      <a href="#how" class="btn-ghost">Jak to działa</a>
+    </div>
+  </div>
+
+  <div class="hero-device">
+    <div class="device-glow-outer"></div>
+    <div class="device-globe"></div>
+    <div class="device-body"></div>
+    <div class="steam">
+      <div class="steam-line"></div>
+      <div class="steam-line"></div>
+      <div class="steam-line"></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Przewiń</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TAGLINE STRIP -->
+<div class="tagline-strip">
+  <div class="tagline-track">
+    <span class="tagline-item">Personalizacja snu</span>
+    <span class="tagline-item">Cichy dyfuzor</span>
+    <span class="tagline-item">Naturalne zasypianie</span>
+    <span class="tagline-item">Synchronizacja rytmu</span>
+    <span class="tagline-item">Aplikacja mobilna</span>
+    <span class="tagline-item">Aromaterapia</span>
+    <span class="tagline-item">Dźwięki relaksacyjne</span>
+    <span class="tagline-item">Bez farmakologii</span>
+    <!-- duplicate for seamless loop -->
+    <span class="tagline-item">Personalizacja snu</span>
+    <span class="tagline-item">Cichy dyfuzor</span>
+    <span class="tagline-item">Naturalne zasypianie</span>
+    <span class="tagline-item">Synchronizacja rytmu</span>
+    <span class="tagline-item">Aplikacja mobilna</span>
+    <span class="tagline-item">Aromaterapia</span>
+    <span class="tagline-item">Dźwięki relaksacyjne</span>
+    <span class="tagline-item">Bez farmakologii</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section style="padding: 120px 60px;">
+  <div class="intro reveal">
+    <div class="intro-text">
+      <p class="section-label">O produkcie</p>
+      <h2>Jedna osoba.<br><em>Mniej w głowie.</em><br>Lepszy sen.</h2>
+      <p>Nie potrzebujesz tabletek. Potrzebujesz odpowiedniego środowiska. LUNO analizuje Twoje nawyki i adaptuje się — każdej nocy staje się <strong>precyzyjniej dopasowany do Ciebie</strong>.</p>
+      <p>Trzy zmysły działają razem: <strong>ciepłe, ściemniane światło</strong> sygnalizuje ciału czas odpoczynku. <strong>Cichy dyfuzor</strong> uwalnia kompozycję aromaterapeutyczną. <strong>Dźwięki relaksacyjne</strong> wyciszają gonitwę myśli.</p>
+    </div>
+    <div class="intro-visual">
+      <div class="intro-orb"></div>
+      <div class="intro-card">
+        <div class="card-icon">☽</div>
+        <h4>Analiza rytmu snu</h4>
+        <p>Algorytm uczy się Twoich nawyków i optymalizuje warunki każdej kolejnej nocy.</p>
+      </div>
+      <div class="intro-card">
+        <div class="card-icon">◎</div>
+        <h4>Trzy zmysły naraz</h4>
+        <p>Światło, zapach i dźwięk — zsynchronizowane w jednym protokole zasypiania.</p>
+      </div>
+      <div class="intro-card">
+        <div class="card-icon">◈</div>
+        <h4>Zero farmakologii</h4>
+        <p>Naturalne wsparcie oparte na chronobiologii. Bez uzależnienia. Bez skutków ubocznych.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" style="padding: 0 60px 120px;">
+  <div class="features reveal">
+    <div class="features-header">
+      <p class="section-label">Funkcje</p>
+      <h2>Poczuj <em>senność.</em><br>Zaufaj procesom.</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-tile">
+        <div class="feature-num">01</div>
+        <div class="feature-title">Inteligentne oświetlenie</div>
+        <p class="feature-desc">Ciepłe spektrum 1800–2700K automatycznie ściemnia się wraz z upływem wieczoru, stymulując produkcję melatoniny w naturalnym rytmie.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feature-num">02</div>
+        <div class="feature-title">Dyfuzor aromaterapeutyczny</div>
+        <p class="feature-desc">Cichy ultradźwiękowy nebulizator uwalnia precyzyjnie dobrane kompozycje — lawenda, drzewo sandałowe, bergamotka — zgodnie z Twoim profilem.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feature-num">03</div>
+        <div class="feature-title">Dźwięki relaksacyjne</div>
+        <p class="feature-desc">Biblioteka binauralnych fal delta i theta, dźwięków natury oraz guided meditations — dopasowywana do głębokości Twojego snu.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feature-num">04</div>
+        <div class="feature-title">Personalizacja AI</div>
+        <p class="feature-desc">Po 7 nocach LUNO zna Twój rytm. Automatycznie dobiera intensywność, kompozycję i timing — bez żadnego ustawienia z Twojej strony.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feature-num">05</div>
+        <div class="feature-title">Sterowanie aplikacją</div>
+        <p class="feature-desc">Pełna kontrola z poziomu smartfona. Tworzenie rytuałów, śledzenie jakości snu, dostęp do raportów i rekomendacji tygodniowych.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feature-num">06</div>
+        <div class="feature-title">Budzenie sensoryczne</div>
+        <p class="feature-desc">Stopniowe rozjaśnianie i delikatny dźwięk porannej natury — budzenie w odpowiedniej fazie snu, by wstawać gotowym, nie zmęczonym.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHT SECTION -->
+<section style="padding: 0 60px 120px;">
+  <div class="insight-section reveal">
+    <div class="insight-visual">
+      <div class="lamp-glow-sm"></div>
+      <div class="insight-lamp">
+        <div class="lamp-globe-sm"></div>
+        <div class="lamp-base-sm"></div>
+        <div class="lamp-text-sm">LUNO</div>
+      </div>
+    </div>
+    <div class="insight-text">
+      <p class="section-label">Insight</p>
+      <blockquote>
+        „Nie cierpisz na brak snu.<br>Cierpisz na brak <span>rytuału</span>."
+      </blockquote>
+      <p class="insight-body">Badania chronobiologiczne pokazują, że 73% problemów z zasypianiem wynika z nieodpowiedniego środowiska — nie ze stresu, nie z telefonu. LUNO rozwiązuje problem u źródła: tworzy warunki, w których ciało samo chce zasnąć.</p>
+      <div class="insight-stats">
+        <div class="stat-item">
+          <div class="stat-num">−27%</div>
+          <div class="stat-label">krótszy czas zasypiania po 14 dniach</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">91%</div>
+          <div class="stat-label">użytkowników śpi głębiej po miesiącu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="padding: 0 60px 120px;">
+  <div class="how reveal">
+    <div class="how-header">
+      <p class="section-label">Jak to działa</p>
+      <h2>Cztery kroki do <em style="font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--amber-light);">głębokiego snu</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01 /</div>
+        <span class="step-icon">◉</span>
+        <h3>Konfiguracja profilu</h3>
+        <p>Odpowiadasz na 5 pytań w aplikacji. Godziny wstawania, wrażliwość na zapachy, preferowane otoczenie dźwiękowe.</p>
+        <div class="step-line"></div>
+      </div>
+      <div class="step">
+        <div class="step-num">02 /</div>
+        <span class="step-icon">◑</span>
+        <h3>Pierwszy rytuał</h3>
+        <p>Na 90 minut przed snem LUNO automatycznie rozpoczyna sekwencję: ściemnia światło, aktywuje dyfuzor, uruchamia dźwięki.</p>
+        <div class="step-line"></div>
+      </div>
+      <div class="step">
+        <div class="step-num">03 /</div>
+        <span class="step-icon">◐</span>
+        <h3>Nauka i adaptacja</h3>
+        <p>Po każdej nocy aplikacja analizuje wzorzec snu. Algorytm koryguje parametry, stając się coraz precyzyjniejszy.</p>
+        <div class="step-line"></div>
+      </div>
+      <div class="step">
+        <div class="step-num">04 /</div>
+        <span class="step-icon">○</span>
+        <h3>Twój ideał snu</h3>
+        <p>Po 2 tygodniach LUNO zna Cię lepiej niż jakikolwiek suplement. Efekty, które zostają na zawsze.</p>
+        <div class="step-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOODS -->
+<section id="moods" style="padding: 0 60px 120px;">
+  <div class="moods reveal">
+    <div class="moods-header">
+      <p class="section-label">Tryby snu</p>
+      <h2>Wybierz swój<br>nastrój na noc.</h2>
+    </div>
+    <div class="mood-cards">
+      <div class="mood-card">
+        <div class="mood-card-inner">
+          <div class="mood-orb"></div>
+          <div class="mood-tag">Najpopularniejszy</div>
+          <h3 class="mood-title">Głęboki Spokój</h3>
+          <p class="mood-desc">Amber glow · Lawenda & cedr · Fale delta 0.5 Hz.<br>Dla tych, którzy nie mogą wyłączyć głowy.</p>
+        </div>
+      </div>
+      <div class="mood-card">
+        <div class="mood-card-inner">
+          <div class="mood-orb"></div>
+          <div class="mood-tag">Tryb Premium</div>
+          <h3 class="mood-title">Forest Bath</h3>
+          <p class="mood-desc">Naturalna zieleń · Eukaliptus · Deszcz w lesie.<br>Detoks sensoryczny dla miejskich wojowników.</p>
+        </div>
+      </div>
+      <div class="mood-card">
+        <div class="mood-card-inner">
+          <div class="mood-orb"></div>
+          <div class="mood-tag">Regeneracja</div>
+          <h3 class="mood-title">Ocean Mind</h3>
+          <p class="mood-desc">Zimny błękit · Morze i sól · Fale theta.<br>Reset po najtrudniejszych dniach.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE STRIP -->
+<div class="copy-strip reveal">
+  <h2>Otula, wycisza.<br><em>i pomaga zasnąć.</em></h2>
+  <p>Kompleksowe wsparcie snu. Światło, dźwięk i aromaterapia w jednym urządzeniu — sterowane Twoim rytmem dobowym.</p>
+</div>
+
+<!-- PROCESS / CASE STUDY -->
+<section id="process" style="padding: 80px 60px 120px;">
+  <div class="process reveal">
+    <div class="process-header">
+      <p class="section-label">Case study · AI Creative Process</p>
+      <h2>Jak powstał<br>ten projekt</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-item">
+        <div class="process-num-circle">1</div>
+        <div class="process-item-text">
+          <h4>Brief i strategia</h4>
+          <p>Wypracowanie insightu: problem ze snem nie tkwi w farmakologii — tkwi w środowisku. Stąd hasło „Wyciszenie bez recepty" i cała narracja sensoryczna.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num-circle">2</div>
+        <div class="process-item-text">
+          <h4>Wizja i estetyka</h4>
+          <p>Paleta ciepłych brązów i amberu celowo naśladuje ciepło lampki nocnej. Seryfowa typografia przywołuje spokój i intymność — nie technologię.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num-circle">3</div>
+        <div class="process-item-text">
+          <h4>Generowanie zdjęć produktu</h4>
+          <p>Zdjęcia wypromptowane tak, by odwzorowywały produkt i brief. Konsekwentna estetyka we wszystkich ujęciach — ciepłe tło, parująca mgła, złote podświetlenie.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num-circle">4</div>
+        <div class="process-item-text">
+          <h4>Kreacja i kompozycja</h4>
+          <p>Dobór typografii, hierarchia hasłowa, layout kreacji na posty i stories — pełna linia graficzna wokół jednej palety i jednego języka wizualnego.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num-circle">5</div>
+        <div class="process-item-text">
+          <h4>Adaptacje formatów</h4>
+          <p>Kreacje na Instagram (stories + feed), reklamy Meta Ads (3 warianty copy + visual), landing page — wszystko spójne, gotowe do wdrożenia.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num-circle">6</div>
+        <div class="process-item-text">
+          <h4>Material wideo</h4>
+          <p>Seriale wideo z użyciem Sora — animowane sekwencje produktowe, które oddają nastrój i sensoryczność marki bez kosztownej sesji.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tools-row">
+      <span class="tool-tag">ChatGPT</span>
+      <span class="tool-tag">Sora</span>
+      <span class="tool-tag">Adobe Photoshop</span>
+      <span class="tool-tag">Adobe Illustrator</span>
+      <span class="tool-tag">After Effects</span>
+      <span class="tool-tag">Midjourney</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="cta-section">
+  <div class="cta-glow"></div>
+  <p class="section-label" style="position: relative;">Zamów LUNO</p>
+  <h2>Sen,<br>który czujesz.</h2>
+  <p>Pierwsze 500 zamówień z bezpłatnym zestawem startowym olejków eterycznych (wartość 89 zł).</p>
+  <a href="#" class="btn-primary" style="position: relative; font-size: 12px; padding: 18px 52px;">Zamów teraz → 599 zł</a>
+  <div>
+    <span class="price-note">Darmowa dostawa · 60-dniowy zwrot · 2 lata gwarancji</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">LUNO</div>
+  <div class="footer-links">
+    <a href="#">Polityka prywatności</a>
+    <a href="#">Regulamin</a>
+    <a href="#">Kontakt</a>
+  </div>
+  <div class="footer-copy">© 2025 LUNO · Projekt: Natalia Przybylska</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Staggered child animations
+  document.querySelectorAll('.features-grid .feature-tile, .steps .step, .mood-cards .mood-card, .process-grid .process-item').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
