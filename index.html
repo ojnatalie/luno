@@ -2,1102 +2,1074 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>LUNO — Sen, który czujesz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 
 <style>
-  :root {
-    --brown-deep: #1a0f08;
-    --brown-dark: #2d1a0e;
-    --brown-mid: #4a2e1a;
-    --brown-warm: #6b3f22;
-    --amber: #c87941;
-    --amber-light: #e8a96a;
-    --amber-glow: #f5c87a;
-    --cream: #f5ede0;
-    --cream-light: #faf5ee;
-    --sand: #b8956a;
-    --text-light: #f0e4d0;
-    --text-muted: #a08060;
-  }
+:root {
+  --brown-deep: #1a0f08;
+  --brown-dark: #2d1a0e;
+  --brown-mid: #4a2e1a;
+  --amber: #c87941;
+  --amber-light: #e8a96a;
+  --amber-glow: #f5c87a;
+  --cream: #f5ede0;
+  --cream-light: #faf5ee;
+  --sand: #b8956a;
+  --text-light: #f0e4d0;
+  --text-muted: #a08060;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
-  html { scroll-behavior: smooth; }
+body {
+  background: var(--brown-deep);
+  color: var(--text-light);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-  body {
-    background: var(--brown-deep);
-    color: var(--text-light);
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
+img { max-width: 100%; display: block; }
 
-  /* ─── NAV ─── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 28px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(to bottom, rgba(26,15,8,0.95) 0%, transparent 100%);
-  }
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 clamp(16px, 4vw, 60px);
+  padding-top: calc(16px + var(--safe-top));
+  padding-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(26,15,8,0.96) 0%, transparent 100%);
+  min-height: 64px;
+}
 
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: 6px;
-    color: var(--cream);
-  }
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 6px;
+  color: var(--cream);
+}
 
-  .nav-links {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-  }
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
 
-  .nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 11px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 10.5px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  font-weight: 400;
+}
+.nav-links a:hover { color: var(--cream); }
 
-  .nav-links a:hover { color: var(--cream); }
+.nav-cta {
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--amber-light) !important;
+  border: 1px solid rgba(232,169,106,0.5);
+  padding: 8px 20px;
+  border-radius: 2px;
+  transition: all 0.3s !important;
+}
+.nav-cta:hover { background: var(--amber-light); color: var(--brown-deep) !important; }
 
-  .nav-cta {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--amber-light) !important;
-    border: 1px solid var(--amber-light);
-    padding: 10px 24px;
-    border-radius: 2px;
-    transition: all 0.3s !important;
-  }
+/* ─── HAMBURGER ─── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px; height: 44px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px; height: 1.5px;
+  background: var(--cream);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-  .nav-cta:hover {
-    background: var(--amber-light);
-    color: var(--brown-deep) !important;
-  }
+.nav-mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(26,15,8,0.97);
+  backdrop-filter: blur(20px);
+  z-index: 250;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  padding-bottom: var(--safe-bottom);
+}
+.nav-mobile-overlay.open { opacity: 1; pointer-events: all; }
+.nav-mobile-overlay a {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: clamp(22px, 7vw, 30px);
+  color: var(--cream);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+  padding: 6px 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-mobile-overlay a:hover { color: var(--amber-light); }
+.nav-mobile-close-hint {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 24px;
+}
 
-  /* ─── HERO ─── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background: radial-gradient(ellipse 80% 60% at 50% 60%, #3d1f0a 0%, #1a0f08 60%);
-  }
+/* ─── HERO ─── */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% 60%, #3d1f0a 0%, #1a0f08 60%);
+}
 
-  .hero-glow {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,121,65,0.18) 0%, rgba(200,121,65,0.06) 40%, transparent 70%);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -30%);
-    animation: breathe 5s ease-in-out infinite;
-  }
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,121,65,0.18) 0%, rgba(200,121,65,0.06) 40%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -30%);
+  animation: breathe 5s ease-in-out infinite;
+  pointer-events: none;
+}
 
-  @keyframes breathe {
-    0%, 100% { opacity: 0.6; transform: translate(-50%, -30%) scale(1); }
-    50% { opacity: 1; transform: translate(-50%, -30%) scale(1.08); }
-  }
+@keyframes breathe {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -30%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -30%) scale(1.08); }
+}
 
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    max-width: 900px;
-    padding: 0 40px;
-  }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 820px;
+  padding: clamp(80px, 14vw, 130px) clamp(20px, 6vw, 40px) clamp(100px, 18vw, 200px);
+}
 
-  .hero-eyebrow {
-    font-size: 10px;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 32px;
-    animation: fadeUp 1s ease both;
-  }
+.hero-eyebrow {
+  font-size: 9.5px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 28px;
+  animation: fadeUp 1s ease both;
+  font-weight: 400;
+}
 
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(64px, 9vw, 130px);
-    font-weight: 300;
-    line-height: 0.92;
-    color: var(--cream-light);
-    letter-spacing: -1px;
-    margin-bottom: 20px;
-    animation: fadeUp 1s ease 0.15s both;
-  }
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(58px, 12vw, 130px);
+  font-weight: 300;
+  line-height: 0.92;
+  color: var(--cream-light);
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  animation: fadeUp 1s ease 0.15s both;
+}
+.hero-title em { font-style: italic; color: var(--amber-glow); }
 
-  .hero-title em {
-    font-style: italic;
-    color: var(--amber-glow);
-  }
+.hero-subtitle {
+  font-size: clamp(13px, 2.2vw, 15px);
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  max-width: 460px;
+  margin: 0 auto 44px;
+  line-height: 1.85;
+  animation: fadeUp 1s ease 0.3s both;
+}
 
-  .hero-subtitle {
-    font-size: 14px;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    max-width: 480px;
-    margin: 0 auto 52px;
-    line-height: 1.8;
-    animation: fadeUp 1s ease 0.3s both;
-  }
+.hero-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  animation: fadeUp 1s ease 0.45s both;
+  flex-wrap: wrap;
+}
 
-  .hero-actions {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    animation: fadeUp 1s ease 0.45s both;
-  }
+.btn-primary {
+  background: var(--amber);
+  color: var(--brown-deep);
+  border: none;
+  padding: 16px 36px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s;
+  border-radius: 2px;
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+}
+.btn-primary:hover { background: var(--amber-glow); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,121,65,0.35); }
 
-  .btn-primary {
-    background: var(--amber);
-    color: var(--brown-deep);
-    border: none;
-    padding: 16px 40px;
-    font-family: 'Jost', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s;
-    border-radius: 2px;
-  }
+.btn-ghost {
+  color: var(--text-muted);
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.3s;
+  font-weight: 400;
+  min-height: 50px;
+}
+.btn-ghost:hover { color: var(--cream); }
+.btn-ghost::before { content: ''; width: 24px; height: 1px; background: currentColor; transition: width 0.3s; }
+.btn-ghost:hover::before { width: 38px; }
 
-  .btn-primary:hover {
-    background: var(--amber-glow);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 30px rgba(200,121,65,0.3);
-  }
+/* Device illustration */
+.hero-device {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(180px, 30vw, 260px);
+  height: clamp(220px, 38vw, 310px);
+  animation: floatDevice 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes floatDevice {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-12px); }
+}
 
-  .btn-ghost {
-    color: var(--text-muted);
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: color 0.3s;
-  }
+.device-body {
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 66%;
+  height: 52%;
+  background: linear-gradient(160deg, #2a1a0e 0%, #1c1008 100%);
+  border-radius: 14px 14px 18px 18px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+}
 
-  .btn-ghost:hover { color: var(--cream); }
+.device-globe {
+  position: absolute;
+  bottom: 45%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 66%; height: 70%;
+  background: radial-gradient(ellipse at 40% 60%, rgba(245,200,120,0.95) 0%, rgba(230,160,80,0.85) 30%, rgba(180,100,40,0.6) 60%, rgba(100,50,20,0.2) 85%, transparent 100%);
+  border-radius: 50% 50% 40% 40%;
+  filter: blur(1px);
+  animation: glowPulse 4s ease-in-out infinite;
+}
 
-  .btn-ghost::before {
-    content: '';
-    width: 28px;
-    height: 1px;
-    background: currentColor;
-    transition: width 0.3s;
-  }
+.device-glow-outer {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%; height: 140%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,121,65,0.18) 0%, rgba(200,121,65,0.05) 50%, transparent 70%);
+  animation: outerGlow 4s ease-in-out infinite;
+}
 
-  .btn-ghost:hover::before { width: 40px; }
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.85; filter: blur(1px); }
+  50% { opacity: 1; filter: blur(0.5px); }
+}
+@keyframes outerGlow {
+  0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+}
 
-  /* LUNO device illustration */
-  .hero-device {
-    position: absolute;
-    bottom: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 260px;
-    height: 310px;
-    animation: floatDevice 6s ease-in-out infinite;
-  }
+.steam {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.steam-line {
+  position: absolute;
+  width: 2px; height: 40px;
+  background: linear-gradient(to top, rgba(255,255,255,0.15), transparent);
+  border-radius: 2px;
+  animation: steamRise 3s ease-in-out infinite;
+}
+.steam-line:nth-child(1) { left: -6px; animation-delay: 0s; }
+.steam-line:nth-child(2) { left: 4px; animation-delay: 1s; height: 55px; }
+.steam-line:nth-child(3) { left: 14px; animation-delay: 2s; }
+@keyframes steamRise {
+  0% { opacity: 0; transform: translateY(0) scaleX(1); }
+  30% { opacity: 0.8; }
+  100% { opacity: 0; transform: translateY(-60px) scaleX(1.5); }
+}
 
-  @keyframes floatDevice {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-12px); }
-  }
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: fadeUp 1s ease 1.2s both;
+}
+.scroll-hint span { font-size: 8.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); }
+.scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--text-muted), transparent); animation: scrollAnim 2s ease-in-out infinite; }
+@keyframes scrollAnim {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
 
-  .device-body {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
-    height: 160px;
-    background: linear-gradient(160deg, #2a1a0e 0%, #1c1008 100%);
-    border-radius: 20px 20px 24px 24px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
-  }
+/* ─── TAGLINE STRIP ─── */
+.tagline-strip {
+  background: var(--brown-dark);
+  padding: 20px 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(100,60,30,0.3);
+  border-bottom: 1px solid rgba(100,60,30,0.3);
+}
+.tagline-track {
+  display: flex;
+  gap: 48px;
+  white-space: nowrap;
+  animation: scrollLeft 20s linear infinite;
+}
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.tagline-item {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 400;
+}
+.tagline-item::after { content: '·'; color: var(--amber); font-size: 18px; line-height: 1; }
 
-  .device-globe {
-    position: absolute;
-    bottom: 130px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
-    height: 200px;
-    background: radial-gradient(ellipse at 40% 60%, rgba(245,200,120,0.95) 0%, rgba(230,160,80,0.85) 30%, rgba(180,100,40,0.6) 60%, rgba(100,50,20,0.2) 85%, transparent 100%);
-    border-radius: 50% 50% 40% 40%;
-    filter: blur(1px);
-    animation: glowPulse 4s ease-in-out infinite;
-  }
+/* ─── SECTION BASE ─── */
+section { padding: clamp(64px, 10vw, 120px) clamp(16px, 5vw, 60px); }
 
-  @keyframes glowPulse {
-    0%, 100% { opacity: 0.85; filter: blur(1px); }
-    50% { opacity: 1; filter: blur(0.5px); }
-  }
+.section-label {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 18px;
+  font-weight: 400;
+}
 
-  .device-glow-outer {
-    position: absolute;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 360px;
-    height: 360px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,121,65,0.2) 0%, rgba(200,121,65,0.05) 50%, transparent 70%);
-    animation: outerGlow 4s ease-in-out infinite;
-  }
+.container { max-width: 1200px; margin: 0 auto; }
 
-  @keyframes outerGlow {
-    0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
-    50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
-  }
+/* ─── INTRO ─── */
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
 
-  .steam {
-    position: absolute;
-    bottom: 290px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+.intro-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5vw, 68px);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--cream);
+  margin-bottom: 28px;
+}
+.intro-text h2 em { font-style: italic; color: var(--amber-light); }
 
-  .steam-line {
-    position: absolute;
-    width: 2px;
-    height: 40px;
-    background: linear-gradient(to top, rgba(255,255,255,0.15), transparent);
-    border-radius: 2px;
-    animation: steamRise 3s ease-in-out infinite;
-  }
+.intro-text p {
+  font-size: clamp(13px, 1.6vw, 15px);
+  line-height: 1.9;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+.intro-text p strong { color: var(--cream); font-weight: 500; }
 
-  .steam-line:nth-child(1) { left: -6px; animation-delay: 0s; }
-  .steam-line:nth-child(2) { left: 4px; animation-delay: 1s; height: 55px; }
-  .steam-line:nth-child(3) { left: 14px; animation-delay: 2s; }
+.intro-visual {
+  position: relative;
+  height: 480px;
+}
 
-  @keyframes steamRise {
-    0% { opacity: 0; transform: translateY(0) scaleX(1); }
-    30% { opacity: 0.8; }
-    100% { opacity: 0; transform: translateY(-60px) scaleX(1.5); }
-  }
+.intro-card {
+  position: absolute;
+  background: rgba(45,26,14,0.75);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(100,60,30,0.3);
+  border-radius: 14px;
+  padding: 24px;
+  transition: transform 0.4s;
+}
+.intro-card:hover { transform: translateY(-4px); }
 
-  .scroll-hint {
-    position: absolute;
-    bottom: 36px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    animation: fadeUp 1s ease 1.2s both;
-  }
+.intro-card h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 7px;
+}
+.intro-card p { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
 
-  .scroll-hint span {
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
+.card-icon {
+  width: 34px; height: 34px;
+  background: rgba(200,121,65,0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  color: var(--amber);
+  font-size: 15px;
+}
 
-  .scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--text-muted), transparent);
-    animation: scrollAnim 2s ease-in-out infinite;
-  }
+.intro-card:nth-child(1) { top: 0; left: 0; width: 250px; }
+.intro-card:nth-child(2) { top: 110px; right: 0; width: 230px; }
+.intro-card:nth-child(3) { bottom: 20px; left: 36px; width: 260px; }
+.intro-orb {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 190px; height: 190px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,121,65,0.22) 0%, rgba(200,121,65,0.05) 60%, transparent 80%);
+  animation: breathe 4s ease-in-out infinite;
+}
 
-  @keyframes scrollAnim {
-    0%, 100% { opacity: 0.3; transform: scaleY(1); }
-    50% { opacity: 0.8; transform: scaleY(1.2); }
-  }
+/* ─── FEATURES ─── */
+.features-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.features-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 6vw, 80px);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1;
+}
+.features-header h2 em { font-style: italic; color: var(--amber-light); }
 
-  /* ─── TAGLINE STRIP ─── */
-  .tagline-strip {
-    background: var(--brown-dark);
-    padding: 28px 0;
-    overflow: hidden;
-    border-top: 1px solid rgba(100,60,30,0.3);
-    border-bottom: 1px solid rgba(100,60,30,0.3);
-  }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.feature-tile {
+  background: var(--brown-dark);
+  padding: clamp(32px, 4vw, 52px) clamp(24px, 3vw, 40px);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s;
+  cursor: default;
+}
+.feature-tile::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s;
+}
+.feature-tile:hover { background: rgba(45,26,14,0.95); }
+.feature-tile:hover::before { transform: scaleX(1); }
 
-  .tagline-track {
-    display: flex;
-    gap: 60px;
-    white-space: nowrap;
-    animation: scrollLeft 20s linear infinite;
-  }
+.feature-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px;
+  font-weight: 300;
+  color: rgba(200,121,65,0.1);
+  line-height: 1;
+  margin-bottom: -16px;
+  letter-spacing: -3px;
+}
+.feature-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+.feature-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.8; }
 
-  @keyframes scrollLeft {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
+/* ─── PHOTO GALLERY ─── */
+.gallery-section {
+  background: var(--brown-dark);
+  border-top: 1px solid rgba(100,60,30,0.25);
+  border-bottom: 1px solid rgba(100,60,30,0.25);
+  overflow: hidden;
+}
 
-  .tagline-item {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
+.gallery-header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+.gallery-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 6vw, 70px);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.05;
+}
+.gallery-header h2 em { font-style: italic; color: var(--amber-light); }
+.gallery-header p {
+  margin-top: 14px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
 
-  .tagline-item::after {
-    content: '·';
-    color: var(--amber);
-    font-size: 20px;
-    line-height: 1;
-  }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 3px;
+}
 
-  /* ─── SECTION BASE ─── */
-  section { padding: 120px 60px; }
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.gallery-item:hover .gallery-img { transform: scale(1.04); }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
 
-  .section-label {
-    font-size: 9px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 20px;
-  }
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
 
-  /* ─── INTRO ─── */
-  .intro {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+/* First item spans full width */
+.gallery-item:nth-child(1) {
+  grid-column: 1 / -1;
+}
+.gallery-item:nth-child(1) .gallery-img {
+  max-height: 600px;
+  object-position: center 30%;
+}
 
-  .intro-text h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(44px, 5vw, 72px);
-    font-weight: 300;
-    line-height: 1.05;
-    color: var(--cream);
-    margin-bottom: 30px;
-  }
+/* Bottom two are 1:1 squares */
+.gallery-item:nth-child(2) .gallery-img,
+.gallery-item:nth-child(3) .gallery-img {
+  aspect-ratio: 1;
+}
 
-  .intro-text h2 em {
-    font-style: italic;
-    color: var(--amber-light);
-  }
+/* 4th item also full width */
+.gallery-item:nth-child(4) {
+  grid-column: 1 / -1;
+}
+.gallery-item:nth-child(4) .gallery-img {
+  max-height: 540px;
+  object-position: center 40%;
+}
 
-  .intro-text p {
-    font-size: 15px;
-    line-height: 1.9;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-  }
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,15,8,0.5) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  display: flex;
+  align-items: flex-end;
+  padding: 28px;
+}
+.gallery-caption {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 0.85;
+}
 
-  .intro-text p strong {
-    color: var(--cream);
-    font-weight: 400;
-  }
+/* ─── INSIGHT ─── */
+.insight-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: var(--brown-dark);
+  border-radius: 4px;
+  overflow: hidden;
+}
 
+.insight-visual {
+  background: radial-gradient(ellipse 100% 80% at 50% 80%, #3d200a 0%, #1a0e06 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 440px;
+  position: relative;
+  overflow: hidden;
+}
+
+.insight-lamp { width: 140px; height: 160px; position: relative; }
+
+.lamp-globe-sm {
+  position: absolute;
+  bottom: 80px; left: 50%;
+  transform: translateX(-50%);
+  width: 120px; height: 130px;
+  background: radial-gradient(ellipse at 40% 60%, rgba(245,200,120,0.9) 0%, rgba(230,160,80,0.7) 35%, rgba(180,100,40,0.3) 70%, transparent 100%);
+  border-radius: 50% 50% 35% 35%;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+.lamp-base-sm {
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 130px; height: 90px;
+  background: linear-gradient(160deg, #2a1a0e 0%, #1a0d07 100%);
+  border-radius: 14px 14px 18px 18px;
+}
+.lamp-glow-sm {
+  position: absolute;
+  bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,121,65,0.2) 0%, transparent 70%);
+  animation: glowPulse 4s ease-in-out 0.5s infinite;
+}
+.lamp-text-sm {
+  position: absolute;
+  bottom: 38px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: rgba(180,130,80,0.55);
+  white-space: nowrap;
+}
+
+.insight-text {
+  padding: clamp(40px, 6vw, 70px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.insight-text blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--cream);
+  margin-bottom: 30px;
+}
+.insight-text blockquote span { color: var(--amber-light); font-style: normal; }
+
+.insight-body { font-size: 13.5px; color: var(--text-muted); line-height: 1.9; margin-bottom: 36px; }
+
+.insight-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 300;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.stat-label { font-size: 11px; letter-spacing: 1.2px; color: var(--text-muted); line-height: 1.5; }
+
+/* ─── HOW IT WORKS ─── */
+.how-header { text-align: center; margin-bottom: 64px; }
+.how-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5vw, 68px);
+  font-weight: 300;
+  color: var(--cream);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(100,60,30,0.2);
+}
+.step {
+  background: var(--brown-deep);
+  padding: clamp(36px, 4vw, 50px) clamp(24px, 3vw, 36px);
+  position: relative;
+}
+.step-line {
+  position: absolute;
+  top: 60px; right: -1px;
+  width: 1px; height: 36px;
+  background: linear-gradient(to bottom, transparent, var(--amber), transparent);
+}
+.step:last-child .step-line { display: none; }
+
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  color: var(--amber);
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+.step-icon { font-size: 28px; margin-bottom: 18px; display: block; }
+.step h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(19px, 2.2vw, 24px);
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+.step p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+
+/* ─── MOODS ─── */
+.moods-header { margin-bottom: 52px; }
+.moods-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5vw, 68px);
+  font-weight: 300;
+  color: var(--cream);
+  max-width: 560px;
+  line-height: 1.1;
+}
+
+.mood-cards {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+.mood-card { border-radius: 4px; overflow: hidden; cursor: pointer; }
+.mood-card-inner {
+  padding: clamp(32px, 4vw, 44px) clamp(24px, 3vw, 36px);
+  position: relative;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: transform 0.4s;
+}
+.mood-card:hover .mood-card-inner { transform: scale(1.01); }
+
+.mood-card:nth-child(1) .mood-card-inner { background: linear-gradient(160deg, #3d1a08 0%, #1a0a04 100%); min-height: 360px; }
+.mood-card:nth-child(2) .mood-card-inner { background: linear-gradient(160deg, #2a2010 0%, #141008 100%); }
+.mood-card:nth-child(3) .mood-card-inner { background: linear-gradient(160deg, #1a2020 0%, #0a1010 100%); }
+
+.mood-orb {
+  position: absolute;
+  top: 24px; right: 24px;
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.mood-card:hover .mood-orb { opacity: 1; }
+.mood-card:nth-child(1) .mood-orb { background: radial-gradient(circle, rgba(245,180,80,0.8) 0%, rgba(200,100,40,0.3) 60%, transparent 80%); width: 90px; height: 90px; }
+.mood-card:nth-child(2) .mood-orb { background: radial-gradient(circle, rgba(180,160,100,0.8) 0%, rgba(140,120,60,0.3) 60%, transparent 80%); }
+.mood-card:nth-child(3) .mood-orb { background: radial-gradient(circle, rgba(100,160,180,0.6) 0%, rgba(60,100,140,0.2) 60%, transparent 80%); }
+
+.mood-tag { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+.mood-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 3vw, 32px); font-weight: 400; color: var(--cream); margin-bottom: 8px; line-height: 1.1; }
+.mood-desc { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+
+/* ─── COPY STRIP ─── */
+.copy-strip {
+  text-align: center;
+  padding: clamp(72px, 12vw, 100px) clamp(16px, 5vw, 60px);
+  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(60,30,15,0.4) 0%, transparent 70%);
+}
+.copy-strip h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(44px, 9vw, 108px);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+.copy-strip h2 em { font-style: italic; color: var(--amber-light); display: block; }
+.copy-strip p {
+  margin-top: 24px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.85;
+}
+
+/* ─── PROCESS ─── */
+.process {
+  border-top: 1px solid rgba(100,60,30,0.25);
+  padding-top: 72px;
+}
+.process-header { margin-bottom: 52px; }
+.process-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 300;
+  color: var(--cream);
+}
+
+.process-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+
+.process-item { display: flex; gap: 20px; align-items: flex-start; }
+.process-num-circle {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,121,65,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  color: var(--amber);
+  flex-shrink: 0;
+}
+.process-item-text h4 { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 400; color: var(--cream); margin-bottom: 7px; }
+.process-item-text p { font-size: 12.5px; color: var(--text-muted); line-height: 1.75; }
+
+.tools-row {
+  margin-top: 52px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(100,60,30,0.2);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.tool-tag {
+  font-size: 9.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid rgba(100,60,30,0.4);
+  padding: 7px 16px;
+  border-radius: 2px;
+  transition: all 0.3s;
+  font-weight: 400;
+}
+.tool-tag:hover { border-color: var(--amber); color: var(--amber); }
+
+/* ─── CTA ─── */
+.cta-section {
+  text-align: center;
+  padding: clamp(80px, 14vw, 120px) clamp(16px, 5vw, 60px);
+  background: linear-gradient(to bottom, var(--brown-deep), #120a04);
+  position: relative;
+  overflow: hidden;
+}
+.cta-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,121,65,0.12) 0%, transparent 70%);
+  animation: breathe 5s ease-in-out infinite;
+}
+.cta-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 9vw, 96px);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.05;
+  margin-bottom: 22px;
+  position: relative;
+}
+.cta-section > p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  max-width: 420px;
+  margin: 0 auto 40px;
+  line-height: 1.85;
+  position: relative;
+}
+.price-note {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 10.5px;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: #0e0806;
+  padding: clamp(32px, 5vw, 50px) clamp(16px, 5vw, 60px);
+  padding-bottom: calc(clamp(32px, 5vw, 50px) + var(--safe-bottom));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(100,60,30,0.2);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 19px; letter-spacing: 6px; color: var(--text-muted); }
+.footer-copy { font-size: 10px; letter-spacing: 1.5px; color: rgba(160,128,96,0.4); }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; font-weight: 400; }
+.footer-links a:hover { color: var(--cream); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.85s ease, transform 0.85s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================
+   RESPONSIVE — TABLET 1024px
+   ============================================ */
+@media (max-width: 1024px) {
+  .intro { gap: 48px; }
+  .intro-visual { height: 400px; }
+  .mood-cards { grid-template-columns: 1fr; }
+  .mood-card:nth-child(1) .mood-card-inner { min-height: 280px; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================
+   RESPONSIVE — MOBILE 768px
+   ============================================ */
+@media (max-width: 768px) {
+  /* NAV */
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-mobile-overlay { display: flex; }
+
+  /* HERO */
+  .hero-content { padding-top: calc(72px + var(--safe-top)); padding-bottom: 140px; }
+  .hero-title { font-size: clamp(52px, 15vw, 86px); }
+  .hero-device { bottom: -40px; }
+
+  /* SECTIONS */
+  section { padding: clamp(52px, 8vw, 80px) clamp(16px, 4vw, 32px); }
+
+  /* INTRO */
+  .intro { grid-template-columns: 1fr; gap: 48px; }
   .intro-visual {
-    position: relative;
-    height: 500px;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    position: static;
   }
-
+  .intro-orb { display: none; }
   .intro-card {
-    position: absolute;
-    background: rgba(45,26,14,0.7);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(100,60,30,0.3);
-    border-radius: 16px;
-    padding: 28px;
-    transition: transform 0.4s;
-  }
-
-  .intro-card:hover { transform: translateY(-4px); }
-
-  .intro-card h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 400;
-    color: var(--cream);
-    margin-bottom: 8px;
-  }
-
-  .intro-card p {
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  .card-icon {
-    width: 36px;
-    height: 36px;
-    background: rgba(200,121,65,0.15);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-    color: var(--amber);
-    font-size: 16px;
-  }
-
-  .intro-card:nth-child(1) { top: 0; left: 0; width: 260px; }
-  .intro-card:nth-child(2) { top: 120px; right: 0; width: 240px; }
-  .intro-card:nth-child(3) { bottom: 20px; left: 40px; width: 280px; }
-
-  .intro-orb {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,121,65,0.25) 0%, rgba(200,121,65,0.05) 60%, transparent 80%);
-    animation: breathe 4s ease-in-out infinite;
-  }
-
-  /* ─── FEATURES ─── */
-  .features {
-    background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(60,30,15,0.5) 0%, transparent 70%);
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .features-header {
-    text-align: center;
-    margin-bottom: 80px;
-  }
-
-  .features-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(48px, 6vw, 84px);
-    font-weight: 300;
-    color: var(--cream);
-    line-height: 1;
-  }
-
-  .features-header h2 em {
-    font-style: italic;
-    color: var(--amber-light);
-  }
-
-  .features-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2px;
-  }
-
-  .feature-tile {
-    background: var(--brown-dark);
-    padding: 52px 40px;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.4s;
-    cursor: default;
-  }
-
-  .feature-tile::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--amber), transparent);
-    transform: scaleX(0);
-    transition: transform 0.4s;
-  }
-
-  .feature-tile:hover { background: rgba(45,26,14,0.95); }
-  .feature-tile:hover::before { transform: scaleX(1); }
-
-  .feature-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 72px;
-    font-weight: 300;
-    color: rgba(200,121,65,0.12);
-    line-height: 1;
-    margin-bottom: -20px;
-    letter-spacing: -3px;
-  }
-
-  .feature-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 400;
-    color: var(--cream);
-    margin-bottom: 16px;
-    line-height: 1.2;
-  }
-
-  .feature-desc {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.8;
-  }
-
-  /* ─── INSIGHT SECTION ─── */
-  .insight-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    background: var(--brown-dark);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .insight-visual {
-    background: radial-gradient(ellipse 100% 80% at 50% 80%, #3d200a 0%, #1a0e06 80%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 500px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .insight-lamp {
-    width: 140px;
-    height: 160px;
-    position: relative;
-  }
-
-  .lamp-globe-sm {
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 130px;
-    background: radial-gradient(ellipse at 40% 60%, rgba(245,200,120,0.9) 0%, rgba(230,160,80,0.7) 35%, rgba(180,100,40,0.3) 70%, transparent 100%);
-    border-radius: 50% 50% 35% 35%;
-    animation: glowPulse 4s ease-in-out infinite;
-  }
-
-  .lamp-base-sm {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 130px;
-    height: 90px;
-    background: linear-gradient(160deg, #2a1a0e 0%, #1a0d07 100%);
-    border-radius: 14px 14px 18px 18px;
-  }
-
-  .lamp-glow-sm {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,121,65,0.2) 0%, transparent 70%);
-    animation: glowPulse 4s ease-in-out 0.5s infinite;
-  }
-
-  .lamp-text-sm {
-    position: absolute;
-    bottom: 38px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    letter-spacing: 4px;
-    color: rgba(180,130,80,0.6);
-    white-space: nowrap;
-  }
-
-  .insight-text {
-    padding: 70px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .insight-text blockquote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 54px);
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.2;
-    color: var(--cream);
-    margin-bottom: 36px;
-  }
-
-  .insight-text blockquote span {
-    color: var(--amber-light);
-    font-style: normal;
-  }
-
-  .insight-body {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.9;
-    margin-bottom: 40px;
-  }
-
-  .insight-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-  }
-
-  .stat-item {}
-
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px;
-    font-weight: 300;
-    color: var(--amber);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .stat-label {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    color: var(--text-muted);
-    line-height: 1.5;
-  }
-
-  /* ─── HOW IT WORKS ─── */
-  .how {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .how-header {
-    text-align: center;
-    margin-bottom: 80px;
-  }
-
-  .how-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(44px, 5vw, 70px);
-    font-weight: 300;
-    color: var(--cream);
-  }
-
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: rgba(100,60,30,0.2);
-  }
-
-  .step {
-    background: var(--brown-deep);
-    padding: 50px 36px;
-    position: relative;
-  }
-
-  .step-line {
-    position: absolute;
-    top: 66px;
-    right: -1px;
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, transparent, var(--amber), transparent);
-  }
-
-  .step:last-child .step-line { display: none; }
-
-  .step-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    color: var(--amber);
-    letter-spacing: 2px;
-    margin-bottom: 28px;
-  }
-
-  .step-icon {
-    font-size: 32px;
-    margin-bottom: 20px;
-    display: block;
-  }
-
-  .step h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--cream);
-    margin-bottom: 12px;
-  }
-
-  .step p {
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.8;
-  }
-
-  /* ─── COLLECTIONS / MOODS ─── */
-  .moods {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .moods-header {
-    margin-bottom: 60px;
-  }
-
-  .moods-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(44px, 5vw, 70px);
-    font-weight: 300;
-    color: var(--cream);
-    max-width: 600px;
-    line-height: 1.1;
-  }
-
-  .mood-cards {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 16px;
-    align-items: start;
-  }
-
-  .mood-card {
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    group: true;
-  }
-
-  .mood-card-inner {
-    padding: 44px 36px;
-    position: relative;
-    min-height: 280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    transition: transform 0.4s;
-  }
-
-  .mood-card:hover .mood-card-inner {
-    transform: scale(1.01);
-  }
-
-  .mood-card:nth-child(1) .mood-card-inner {
-    background: linear-gradient(160deg, #3d1a08 0%, #1a0a04 100%);
-    min-height: 380px;
-  }
-
-  .mood-card:nth-child(2) .mood-card-inner {
-    background: linear-gradient(160deg, #2a2010 0%, #141008 100%);
-  }
-
-  .mood-card:nth-child(3) .mood-card-inner {
-    background: linear-gradient(160deg, #1a2020 0%, #0a1010 100%);
-  }
-
-  .mood-orb {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    opacity: 0.7;
-    transition: opacity 0.3s;
-  }
-
-  .mood-card:hover .mood-orb { opacity: 1; }
-
-  .mood-card:nth-child(1) .mood-orb {
-    background: radial-gradient(circle, rgba(245,180,80,0.8) 0%, rgba(200,100,40,0.3) 60%, transparent 80%);
-    width: 100px; height: 100px;
-  }
-
-  .mood-card:nth-child(2) .mood-orb {
-    background: radial-gradient(circle, rgba(180,160,100,0.8) 0%, rgba(140,120,60,0.3) 60%, transparent 80%);
-  }
-
-  .mood-card:nth-child(3) .mood-orb {
-    background: radial-gradient(circle, rgba(100,160,180,0.6) 0%, rgba(60,100,140,0.2) 60%, transparent 80%);
-  }
-
-  .mood-tag {
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 12px;
-  }
-
-  .mood-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 400;
-    color: var(--cream);
-    margin-bottom: 10px;
-    line-height: 1.1;
-  }
-
-  .mood-desc {
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  /* ─── COPY STRIP ─── */
-  .copy-strip {
-    text-align: center;
-    padding: 100px 60px;
-    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(60,30,15,0.4) 0%, transparent 70%);
-  }
-
-  .copy-strip h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 8vw, 110px);
-    font-weight: 300;
-    color: var(--cream);
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-
-  .copy-strip h2 em {
-    font-style: italic;
-    color: var(--amber-light);
-    display: block;
-  }
-
-  .copy-strip p {
-    margin-top: 30px;
-    font-size: 14px;
-    color: var(--text-muted);
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.8;
-  }
-
-  /* ─── PROCESS (portfolio case) ─── */
-  .process {
-    max-width: 1100px;
-    margin: 0 auto;
-    border-top: 1px solid rgba(100,60,30,0.25);
-    padding-top: 80px;
-  }
-
-  .process-header { margin-bottom: 60px; }
-
-  .process-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 52px;
-    font-weight: 300;
-    color: var(--cream);
-  }
-
-  .process-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-  }
-
-  .process-item {
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
-  }
-
-  .process-num-circle {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid rgba(200,121,65,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: var(--amber);
-    flex-shrink: 0;
-  }
-
-  .process-item-text h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 400;
-    color: var(--cream);
-    margin-bottom: 8px;
-  }
-
-  .process-item-text p {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  .tools-row {
-    margin-top: 60px;
-    padding-top: 40px;
-    border-top: 1px solid rgba(100,60,30,0.2);
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .tool-tag {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    border: 1px solid rgba(100,60,30,0.4);
-    padding: 8px 18px;
-    border-radius: 2px;
-    transition: all 0.3s;
-  }
-
-  .tool-tag:hover {
-    border-color: var(--amber);
-    color: var(--amber);
-  }
-
-  /* ─── CTA ─── */
-  .cta-section {
-    text-align: center;
-    padding: 120px 60px;
-    background: linear-gradient(to bottom, var(--brown-deep), #120a04);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,121,65,0.12) 0%, transparent 70%);
-    animation: breathe 5s ease-in-out infinite;
-  }
-
-  .cta-section h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 7vw, 96px);
-    font-weight: 300;
-    color: var(--cream);
-    line-height: 1.05;
-    margin-bottom: 24px;
-    position: relative;
-  }
-
-  .cta-section p {
-    font-size: 14px;
-    color: var(--text-muted);
-    max-width: 440px;
-    margin: 0 auto 48px;
-    line-height: 1.8;
-    position: relative;
-  }
-
-  .price-note {
-    display: inline-block;
-    margin-top: 28px;
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    color: var(--text-muted);
-  }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: #0e0806;
-    padding: 50px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(100,60,30,0.2);
-  }
-
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    letter-spacing: 6px;
-    color: var(--text-muted);
-  }
-
-  .footer-copy {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    color: rgba(160,128,96,0.4);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 30px;
-  }
-
-  .footer-links a {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-
-  .footer-links a:hover { color: var(--cream); }
-
-  /* ─── ANIMATIONS ─── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 900px) {
-    nav { padding: 24px 30px; }
-    .nav-links { display: none; }
-    section { padding: 80px 30px; }
-    .intro { grid-template-columns: 1fr; gap: 60px; }
-    .intro-visual { height: 340px; }
-    .features-grid { grid-template-columns: 1fr; gap: 2px; }
-    .mood-cards { grid-template-columns: 1fr; }
-    .steps { grid-template-columns: 1fr 1fr; }
-    .insight-section { grid-template-columns: 1fr; }
-    .process-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 24px; text-align: center; }
-  }
+    position: static !important;
+    width: 100% !important;
+    top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+  }
+  .intro-card:nth-child(3) { grid-column: 1 / -1; }
+
+  /* FEATURES */
+  .features-grid { grid-template-columns: 1fr; }
+
+  /* GALLERY */
+  .gallery-grid { grid-template-columns: 1fr; gap: 3px; }
+  .gallery-item:nth-child(1),
+  .gallery-item:nth-child(4) { grid-column: auto; }
+  .gallery-item:nth-child(1) .gallery-img { max-height: 480px; }
+  .gallery-item:nth-child(4) .gallery-img { max-height: 420px; }
+  .gallery-item:nth-child(2) .gallery-img,
+  .gallery-item:nth-child(3) .gallery-img { aspect-ratio: 4/3; }
+
+  /* INSIGHT */
+  .insight-section { grid-template-columns: 1fr; }
+  .insight-visual { min-height: 320px; }
+
+  /* HOW */
+  .steps { grid-template-columns: 1fr; }
+  .step-line { display: none; }
+
+  /* MOODS */
+  .mood-cards { grid-template-columns: 1fr; gap: 10px; }
+
+  /* PROCESS */
+  .process-grid { grid-template-columns: 1fr; gap: 24px; }
+
+  /* FOOTER */
+  footer { flex-direction: column; text-align: center; gap: 18px; }
+  .footer-links { justify-content: center; }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL MOBILE 480px
+   ============================================ */
+@media (max-width: 480px) {
+  .hero-title { font-size: clamp(44px, 16vw, 68px); }
+  .hero-subtitle { font-size: 13px; }
+  .hero-actions { flex-direction: column; align-items: center; gap: 16px; }
+  .btn-primary { width: 100%; max-width: 280px; justify-content: center; }
+
+  .intro-visual { grid-template-columns: 1fr; }
+  .intro-card:nth-child(3) { grid-column: auto; }
+
+  .insight-text { padding: 32px 20px; }
+  .insight-stats { grid-template-columns: 1fr 1fr; }
+
+  .gallery-item:nth-child(1) .gallery-img { max-height: 360px; }
+  .gallery-item:nth-child(2) .gallery-img,
+  .gallery-item:nth-child(3) .gallery-img { aspect-ratio: 1; }
+
+  .mood-card-inner { min-height: 220px !important; }
+
+  .copy-strip h2 { font-size: clamp(36px, 12vw, 58px); }
+
+  .cta-section h2 { font-size: clamp(40px, 13vw, 72px); }
+}
 </style>
 </head>
 <body>
@@ -1107,17 +1079,29 @@
   <div class="nav-logo">LUNO</div>
   <ul class="nav-links">
     <li><a href="#features">Funkcje</a></li>
+    <li><a href="#gallery">Galeria</a></li>
     <li><a href="#how">Jak działa</a></li>
     <li><a href="#moods">Tryby</a></li>
-    <li><a href="#process">Case study</a></li>
     <li><a href="#cta" class="nav-cta">Zamów</a></li>
   </ul>
+  <button class="nav-hamburger" id="js-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile-overlay" id="js-mobile-nav">
+  <a href="#features" class="mobile-nav-link">Funkcje</a>
+  <a href="#gallery" class="mobile-nav-link">Galeria</a>
+  <a href="#how" class="mobile-nav-link">Jak działa</a>
+  <a href="#moods" class="mobile-nav-link">Tryby</a>
+  <a href="#process" class="mobile-nav-link">Case study</a>
+  <a href="#cta" class="mobile-nav-link">Zamów</a>
+  <span class="nav-mobile-close-hint">kliknij link lub ESC by zamknąć</span>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
-
   <div class="hero-content">
     <p class="hero-eyebrow">Inteligentne wsparcie snu</p>
     <h1 class="hero-title">Wyciszenie<br><em>bez recepty</em></h1>
@@ -1127,7 +1111,6 @@
       <a href="#how" class="btn-ghost">Jak to działa</a>
     </div>
   </div>
-
   <div class="hero-device">
     <div class="device-glow-outer"></div>
     <div class="device-globe"></div>
@@ -1138,7 +1121,6 @@
       <div class="steam-line"></div>
     </div>
   </div>
-
   <div class="scroll-hint">
     <span>Przewiń</span>
     <div class="scroll-line"></div>
@@ -1156,7 +1138,6 @@
     <span class="tagline-item">Aromaterapia</span>
     <span class="tagline-item">Dźwięki relaksacyjne</span>
     <span class="tagline-item">Bez farmakologii</span>
-    <!-- duplicate for seamless loop -->
     <span class="tagline-item">Personalizacja snu</span>
     <span class="tagline-item">Cichy dyfuzor</span>
     <span class="tagline-item">Naturalne zasypianie</span>
@@ -1169,102 +1150,148 @@
 </div>
 
 <!-- INTRO -->
-<section style="padding: 120px 60px;">
-  <div class="intro reveal">
-    <div class="intro-text">
-      <p class="section-label">O produkcie</p>
-      <h2>Wyciszenie<br><em>bez recepty</em><br>z LUNO.</h2>
-      <p>Nie potrzebujesz tabletek. Potrzebujesz odpowiedniego środowiska. LUNO analizuje Twoje nawyki i adaptuje się — każdej nocy staje się <strong>precyzyjniej dopasowany do Ciebie</strong>.</p>
-      <p>Trzy zmysły działają razem: <strong>ciepłe, ściemniane światło</strong> sygnalizuje ciału czas odpoczynku. <strong>Cichy dyfuzor</strong> uwalnia kompozycję aromaterapeutyczną. <strong>Dźwięki relaksacyjne</strong> wyciszają gonitwę myśli.</p>
-    </div>
-    <div class="intro-visual">
-      <div class="intro-orb"></div>
-      <div class="intro-card">
-        <div class="card-icon">☽</div>
-        <h4>Analiza rytmu snu</h4>
-        <p>Algorytm uczy się Twoich nawyków i optymalizuje warunki każdej kolejnej nocy.</p>
+<section>
+  <div class="container">
+    <div class="intro reveal">
+      <div class="intro-text">
+        <p class="section-label">O produkcie</p>
+        <h2>Wyciszenie<br><em>bez recepty</em><br>z LUNO.</h2>
+        <p>Nie potrzebujesz tabletek. Potrzebujesz odpowiedniego środowiska. LUNO analizuje Twoje nawyki i adaptuje się — każdej nocy staje się <strong>precyzyjniej dopasowany do Ciebie</strong>.</p>
+        <p>Trzy zmysły działają razem: <strong>ciepłe, ściemniane światło</strong> sygnalizuje ciału czas odpoczynku. <strong>Cichy dyfuzor</strong> uwalnia kompozycję aromaterapeutyczną. <strong>Dźwięki relaksacyjne</strong> wyciszają gonitwę myśli.</p>
       </div>
-      <div class="intro-card">
-        <div class="card-icon">◎</div>
-        <h4>Trzy zmysły naraz</h4>
-        <p>Światło, zapach i dźwięk — zsynchronizowane w jednym protokole zasypiania.</p>
-      </div>
-      <div class="intro-card">
-        <div class="card-icon">◈</div>
-        <h4>Zero farmakologii</h4>
-        <p>Naturalne wsparcie oparte na chronobiologii. Bez uzależnienia. Bez skutków ubocznych.</p>
+      <div class="intro-visual">
+        <div class="intro-orb"></div>
+        <div class="intro-card">
+          <div class="card-icon">☽</div>
+          <h4>Analiza rytmu snu</h4>
+          <p>Algorytm uczy się Twoich nawyków i optymalizuje warunki każdej kolejnej nocy.</p>
+        </div>
+        <div class="intro-card">
+          <div class="card-icon">◎</div>
+          <h4>Trzy zmysły naraz</h4>
+          <p>Światło, zapach i dźwięk — zsynchronizowane w jednym protokole zasypiania.</p>
+        </div>
+        <div class="intro-card">
+          <div class="card-icon">◈</div>
+          <h4>Zero farmakologii</h4>
+          <p>Naturalne wsparcie oparte na chronobiologii. Bez uzależnienia. Bez skutków ubocznych.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FEATURES -->
-<section id="features" style="padding: 0 60px 120px;">
-  <div class="features reveal">
-    <div class="features-header">
-      <p class="section-label">Funkcje</p>
-      <h2>Poczuj <em>senność.</em><br>Zaufaj procesom.</h2>
-    </div>
-    <div class="features-grid">
-      <div class="feature-tile">
-        <div class="feature-num">01</div>
-        <div class="feature-title">Inteligentne oświetlenie</div>
-        <p class="feature-desc">Ciepłe spektrum 1800–2700K automatycznie ściemnia się wraz z upływem wieczoru, stymulując produkcję melatoniny w naturalnym rytmie.</p>
+<section id="features">
+  <div class="container">
+    <div class="reveal">
+      <div class="features-header">
+        <p class="section-label">Funkcje</p>
+        <h2>Poczuj <em>senność.</em><br>Zaufaj procesom.</h2>
       </div>
-      <div class="feature-tile">
-        <div class="feature-num">02</div>
-        <div class="feature-title">Dyfuzor aromaterapeutyczny</div>
-        <p class="feature-desc">Cichy ultradźwiękowy nebulizator uwalnia precyzyjnie dobrane kompozycje — lawenda, drzewo sandałowe, bergamotka — zgodnie z Twoim profilem.</p>
-      </div>
-      <div class="feature-tile">
-        <div class="feature-num">03</div>
-        <div class="feature-title">Dźwięki relaksacyjne</div>
-        <p class="feature-desc">Biblioteka binauralnych fal delta i theta, dźwięków natury oraz guided meditations — dopasowywana do głębokości Twojego snu.</p>
-      </div>
-      <div class="feature-tile">
-        <div class="feature-num">04</div>
-        <div class="feature-title">Personalizacja AI</div>
-        <p class="feature-desc">Po 7 nocach LUNO zna Twój rytm. Automatycznie dobiera intensywność, kompozycję i timing — bez żadnego ustawienia z Twojej strony.</p>
-      </div>
-      <div class="feature-tile">
-        <div class="feature-num">05</div>
-        <div class="feature-title">Sterowanie aplikacją</div>
-        <p class="feature-desc">Pełna kontrola z poziomu smartfona. Tworzenie rytuałów, śledzenie jakości snu, dostęp do raportów i rekomendacji tygodniowych.</p>
-      </div>
-      <div class="feature-tile">
-        <div class="feature-num">06</div>
-        <div class="feature-title">Budzenie sensoryczne</div>
-        <p class="feature-desc">Stopniowe rozjaśnianie i delikatny dźwięk porannej natury — budzenie w odpowiedniej fazie snu, by wstawać gotowym, nie zmęczonym.</p>
+      <div class="features-grid">
+        <div class="feature-tile reveal">
+          <div class="feature-num">01</div>
+          <div class="feature-title">Inteligentne oświetlenie</div>
+          <p class="feature-desc">Ciepłe spektrum 1800–2700K automatycznie ściemnia się wraz z upływem wieczoru, stymulując produkcję melatoniny w naturalnym rytmie.</p>
+        </div>
+        <div class="feature-tile reveal">
+          <div class="feature-num">02</div>
+          <div class="feature-title">Dyfuzor aromaterapeutyczny</div>
+          <p class="feature-desc">Cichy ultradźwiękowy nebulizator uwalnia precyzyjnie dobrane kompozycje — lawenda, drzewo sandałowe, bergamotka — zgodnie z Twoim profilem.</p>
+        </div>
+        <div class="feature-tile reveal">
+          <div class="feature-num">03</div>
+          <div class="feature-title">Dźwięki relaksacyjne</div>
+          <p class="feature-desc">Biblioteka binauralnych fal delta i theta, dźwięków natury oraz guided meditations — dopasowywana do głębokości Twojego snu.</p>
+        </div>
+        <div class="feature-tile reveal">
+          <div class="feature-num">04</div>
+          <div class="feature-title">Personalizacja AI</div>
+          <p class="feature-desc">Po 7 nocach LUNO zna Twój rytm. Automatycznie dobiera intensywność, kompozycję i timing — bez żadnego ustawienia z Twojej strony.</p>
+        </div>
+        <div class="feature-tile reveal">
+          <div class="feature-num">05</div>
+          <div class="feature-title">Sterowanie aplikacją</div>
+          <p class="feature-desc">Pełna kontrola z poziomu smartfona. Tworzenie rytuałów, śledzenie jakości snu, dostęp do raportów i rekomendacji tygodniowych.</p>
+        </div>
+        <div class="feature-tile reveal">
+          <div class="feature-num">06</div>
+          <div class="feature-title">Budzenie sensoryczne</div>
+          <p class="feature-desc">Stopniowe rozjaśnianie i delikatny dźwięk porannej natury — budzenie w odpowiedniej fazie snu, by wstawać gotowym, nie zmęczonym.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INSIGHT SECTION -->
-<section style="padding: 0 60px 120px;">
-  <div class="insight-section reveal">
-    <div class="insight-visual">
-      <div class="lamp-glow-sm"></div>
-      <div class="insight-lamp">
-        <div class="lamp-globe-sm"></div>
-        <div class="lamp-base-sm"></div>
-        <div class="lamp-text-sm">LUNO</div>
+<!-- ─── GALLERY ─── -->
+<section id="gallery" class="gallery-section">
+  <div class="container">
+    <div class="gallery-header reveal">
+      <p class="section-label">Produkt</p>
+      <h2>Zaprojektowany dla<br><em>Twojej nocy.</em></h2>
+      <p>Ciepło bursztynu. Cisza. Para, która delikatnie wypełnia powietrze. LUNO to nie gadżet — to rytuał w jednym urządzeniu.</p>
+    </div>
+  </div>
+  <div class="gallery-grid reveal">
+    <!-- Full-width hero gallery image -->
+    <div class="gallery-item">
+      <img src="929378.jpg" alt="LUNO — kremowa wersja urządzenia na białym tle" class="gallery-img">
+      <div class="gallery-overlay">
+        <span class="gallery-caption">LUNO Ivory · Wersja dzienna</span>
       </div>
     </div>
-    <div class="insight-text">
-      <p class="section-label">Poznaj LUNO</p>
-      <blockquote>
-        „Nie cierpisz na brak snu.Cierpisz na brak <br><span>rytuału</span>."
-      </blockquote>
-      <p class="insight-body">Badania chronobiologiczne pokazują, że 73% problemów z zasypianiem wynika z nieodpowiedniego środowiska i chigieny zasypiania. LUNO rozwiązuje problem u źródła: tworzy warunki, w których ciało samo chce zasnąć.</p>
-      <div class="insight-stats">
-        <div class="stat-item">
-          <div class="stat-num">−27%</div>
-          <div class="stat-label">krótszy czas zasypiania <br>po 14 dniach</div>
+    <!-- Two square items -->
+    <div class="gallery-item">
+      <img src="009278.png" alt="LUNO — ciemna wersja z bursztynowym blaskiem" class="gallery-img">
+      <div class="gallery-overlay">
+        <span class="gallery-caption">LUNO Espresso · Tryb nocny</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="str-1.png" alt="LUNO — kreacja z funkcjami produktu" class="gallery-img">
+      <div class="gallery-overlay">
+        <span class="gallery-caption">Trzy funkcje · Jeden rytuał</span>
+      </div>
+    </div>
+    <!-- Full-width bottom -->
+    <div class="gallery-item">
+      <img src="luno-1.png" alt="LUNO — Wycisz umysł, pobudź zmysły" class="gallery-img">
+      <div class="gallery-overlay">
+        <span class="gallery-caption">Wycisz umysł. Pobudź zmysły.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHT -->
+<section>
+  <div class="container">
+    <div class="insight-section reveal">
+      <div class="insight-visual">
+        <div class="lamp-glow-sm"></div>
+        <div class="insight-lamp">
+          <div class="lamp-globe-sm"></div>
+          <div class="lamp-base-sm"></div>
+          <div class="lamp-text-sm">LUNO</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">91%</div>
-          <div class="stat-label">użytkowników śpi głębiej <br>po miesiącu</div>
+      </div>
+      <div class="insight-text">
+        <p class="section-label">Badania</p>
+        <blockquote>
+          „Nie cierpisz na brak snu. Cierpisz na brak <span>rytuału</span>."
+        </blockquote>
+        <p class="insight-body">Badania chronobiologiczne pokazują, że 73% problemów z zasypianiem wynika z nieodpowiedniego środowiska i higieny zasypiania. LUNO rozwiązuje problem u źródła: tworzy warunki, w których ciało samo chce zasnąć.</p>
+        <div class="insight-stats">
+          <div>
+            <div class="stat-num">−27%</div>
+            <div class="stat-label">krótszy czas zasypiania<br>po 14 dniach</div>
+          </div>
+          <div>
+            <div class="stat-num">91%</div>
+            <div class="stat-label">użytkowników śpi głębiej<br>po miesiącu</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1272,35 +1299,35 @@
 </section>
 
 <!-- HOW IT WORKS -->
-<section id="how" style="padding: 0 60px 120px;">
-  <div class="how reveal">
-    <div class="how-header">
+<section id="how">
+  <div class="container">
+    <div class="how-header reveal">
       <p class="section-label">Jak to działa</p>
-      <h2>Cztery kroki do <em style="font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--amber-light);">głębokiego snu</em></h2>
+      <h2>Cztery kroki do <em style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--amber-light);">głębokiego snu</em></h2>
     </div>
     <div class="steps">
-      <div class="step">
+      <div class="step reveal">
         <div class="step-num">01 /</div>
         <span class="step-icon">◉</span>
         <h3>Konfiguracja profilu</h3>
         <p>Odpowiadasz na 5 pytań w aplikacji. Godziny wstawania, wrażliwość na zapachy, preferowane otoczenie dźwiękowe.</p>
         <div class="step-line"></div>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="step-num">02 /</div>
         <span class="step-icon">◑</span>
         <h3>Pierwszy rytuał</h3>
         <p>Na 90 minut przed snem LUNO automatycznie rozpoczyna sekwencję: ściemnia światło, aktywuje dyfuzor, uruchamia dźwięki.</p>
         <div class="step-line"></div>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="step-num">03 /</div>
         <span class="step-icon">◐</span>
         <h3>Nauka i adaptacja</h3>
         <p>Po każdej nocy aplikacja analizuje wzorzec snu. Algorytm koryguje parametry, stając się coraz precyzyjniejszy.</p>
         <div class="step-line"></div>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="step-num">04 /</div>
         <span class="step-icon">○</span>
         <h3>Twój ideał snu</h3>
@@ -1312,14 +1339,14 @@
 </section>
 
 <!-- MOODS -->
-<section id="moods" style="padding: 0 60px 120px;">
-  <div class="moods reveal">
-    <div class="moods-header">
+<section id="moods">
+  <div class="container">
+    <div class="moods-header reveal">
       <p class="section-label">Tryby snu</p>
       <h2>Wybierz swój<br>nastrój na noc.</h2>
     </div>
     <div class="mood-cards">
-      <div class="mood-card">
+      <div class="mood-card reveal">
         <div class="mood-card-inner">
           <div class="mood-orb"></div>
           <div class="mood-tag">Najpopularniejszy</div>
@@ -1327,7 +1354,7 @@
           <p class="mood-desc">Amber glow · Lawenda & cedr · Fale delta 0.5 Hz.<br>Dla tych, którzy nie mogą wyłączyć głowy.</p>
         </div>
       </div>
-      <div class="mood-card">
+      <div class="mood-card reveal">
         <div class="mood-card-inner">
           <div class="mood-orb"></div>
           <div class="mood-tag">Tryb Premium</div>
@@ -1335,7 +1362,7 @@
           <p class="mood-desc">Naturalna zieleń · Eukaliptus · Deszcz w lesie.<br>Detoks sensoryczny dla miejskich wojowników.</p>
         </div>
       </div>
-      <div class="mood-card">
+      <div class="mood-card reveal">
         <div class="mood-card-inner">
           <div class="mood-orb"></div>
           <div class="mood-tag">Regeneracja</div>
@@ -1347,70 +1374,72 @@
   </div>
 </section>
 
-<!-- QUOTE STRIP -->
+<!-- COPY STRIP -->
 <div class="copy-strip reveal">
   <h2>Otula, wycisza.<br><em>i pomaga zasnąć.</em></h2>
   <p>Kompleksowe wsparcie snu. Światło, dźwięk i aromaterapia w jednym urządzeniu — sterowane Twoim rytmem dobowym.</p>
 </div>
 
-<!-- PROCESS / CASE STUDY -->
-<section id="process" style="padding: 80px 60px 120px;">
-  <div class="process reveal">
-    <div class="process-header">
-      <p class="section-label">Case study · AI Creative Process</p>
-      <h2>Jak powstał<br>ten projekt</h2>
-    </div>
-    <div class="process-grid">
-      <div class="process-item">
-        <div class="process-num-circle">1</div>
-        <div class="process-item-text">
-          <h4>Brief i strategia</h4>
-          <p>Wypracowanie insightu: problem ze snem nie tkwi w farmakologii — tkwi w środowisku. Stąd hasło „Wyciszenie bez recepty" i cała narracja sensoryczna.</p>
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="process reveal">
+      <div class="process-header">
+        <p class="section-label">Case study · AI Creative Process</p>
+        <h2>Jak powstał<br>ten projekt</h2>
+      </div>
+      <div class="process-grid">
+        <div class="process-item reveal">
+          <div class="process-num-circle">1</div>
+          <div class="process-item-text">
+            <h4>Brief i strategia</h4>
+            <p>Wypracowanie insightu: problem ze snem nie tkwi w farmakologii — tkwi w środowisku. Stąd hasło „Wyciszenie bez recepty" i cała narracja sensoryczna.</p>
+          </div>
+        </div>
+        <div class="process-item reveal">
+          <div class="process-num-circle">2</div>
+          <div class="process-item-text">
+            <h4>Wizja i estetyka</h4>
+            <p>Paleta ciepłych brązów i amberu celowo naśladuje ciepło lampki nocnej. Seryfowa typografia przywołuje spokój i intymność — nie technologię.</p>
+          </div>
+        </div>
+        <div class="process-item reveal">
+          <div class="process-num-circle">3</div>
+          <div class="process-item-text">
+            <h4>Generowanie zdjęć produktu</h4>
+            <p>Zdjęcia wypromptowane tak, by odwzorowywały produkt i brief. Konsekwentna estetyka we wszystkich ujęciach — ciepłe tło, parująca mgła, złote podświetlenie.</p>
+          </div>
+        </div>
+        <div class="process-item reveal">
+          <div class="process-num-circle">4</div>
+          <div class="process-item-text">
+            <h4>Kreacja i kompozycja</h4>
+            <p>Dobór typografii, hierarchia hasłowa, layout kreacji na posty i stories — pełna linia graficzna wokół jednej palety i jednego języka wizualnego.</p>
+          </div>
+        </div>
+        <div class="process-item reveal">
+          <div class="process-num-circle">5</div>
+          <div class="process-item-text">
+            <h4>Adaptacje formatów</h4>
+            <p>Kreacje na Instagram (stories + feed), reklamy Meta Ads (3 warianty copy + visual), landing page — wszystko spójne, gotowe do wdrożenia.</p>
+          </div>
+        </div>
+        <div class="process-item reveal">
+          <div class="process-num-circle">6</div>
+          <div class="process-item-text">
+            <h4>Materiał wideo</h4>
+            <p>Seriale wideo z użyciem Sora — animowane sekwencje produktowe, które oddają nastrój i sensoryczność marki bez kosztownej sesji.</p>
+          </div>
         </div>
       </div>
-      <div class="process-item">
-        <div class="process-num-circle">2</div>
-        <div class="process-item-text">
-          <h4>Wizja i estetyka</h4>
-          <p>Paleta ciepłych brązów i amberu celowo naśladuje ciepło lampki nocnej. Seryfowa typografia przywołuje spokój i intymność — nie technologię.</p>
-        </div>
+      <div class="tools-row">
+        <span class="tool-tag">ChatGPT</span>
+        <span class="tool-tag">Sora</span>
+        <span class="tool-tag">Adobe Photoshop</span>
+        <span class="tool-tag">Adobe Illustrator</span>
+        <span class="tool-tag">After Effects</span>
+        <span class="tool-tag">Midjourney</span>
       </div>
-      <div class="process-item">
-        <div class="process-num-circle">3</div>
-        <div class="process-item-text">
-          <h4>Generowanie zdjęć produktu</h4>
-          <p>Zdjęcia wypromptowane tak, by odwzorowywały produkt i brief. Konsekwentna estetyka we wszystkich ujęciach — ciepłe tło, parująca mgła, złote podświetlenie.</p>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-num-circle">4</div>
-        <div class="process-item-text">
-          <h4>Kreacja i kompozycja</h4>
-          <p>Dobór typografii, hierarchia hasłowa, layout kreacji na posty i stories — pełna linia graficzna wokół jednej palety i jednego języka wizualnego.</p>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-num-circle">5</div>
-        <div class="process-item-text">
-          <h4>Adaptacje formatów</h4>
-          <p>Kreacje na Instagram (stories + feed), reklamy Meta Ads (3 warianty copy + visual), landing page — wszystko spójne, gotowe do wdrożenia.</p>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-num-circle">6</div>
-        <div class="process-item-text">
-          <h4>Material wideo</h4>
-          <p>Seriale wideo z użyciem Sora — animowane sekwencje produktowe, które oddają nastrój i sensoryczność marki bez kosztownej sesji.</p>
-        </div>
-      </div>
-    </div>
-    <div class="tools-row">
-      <span class="tool-tag">ChatGPT</span>
-      <span class="tool-tag">Sora</span>
-      <span class="tool-tag">Adobe Photoshop</span>
-      <span class="tool-tag">Adobe Illustrator</span>
-      <span class="tool-tag">After Effects</span>
-      <span class="tool-tag">Midjourney</span>
     </div>
   </div>
 </section>
@@ -1418,13 +1447,11 @@
 <!-- CTA -->
 <section id="cta" class="cta-section">
   <div class="cta-glow"></div>
-  <p class="section-label" style="position: relative;">Zamów LUNO</p>
+  <p class="section-label" style="position:relative;">Zamów LUNO</p>
   <h2>Sen,<br>który czujesz.</h2>
   <p>Pierwsze 500 zamówień z bezpłatnym zestawem startowym olejków eterycznych (wartość 89 zł).</p>
-  <a href="#" class="btn-primary" style="position: relative; font-size: 12px; padding: 18px 52px;">Zamów teraz → 599 zł</a>
-  <div>
-    <span class="price-note">Darmowa dostawa · 60-dniowy zwrot · 2 lata gwarancji</span>
-  </div>
+  <a href="#" class="btn-primary" style="position:relative; font-size:11px; padding:18px 48px;">Zamów teraz → 599 zł</a>
+  <div><span class="price-note">Darmowa dostawa · 60-dniowy zwrot · 2 lata gwarancji</span></div>
 </section>
 
 <!-- FOOTER -->
@@ -1442,21 +1469,42 @@
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Staggered child animations
   document.querySelectorAll('.features-grid .feature-tile, .steps .step, .mood-cards .mood-card, .process-grid .process-item').forEach((el, i) => {
-    el.style.transitionDelay = `${i * 0.08}s`;
+    el.style.transitionDelay = `${i * 0.07}s`;
     el.classList.add('reveal');
     observer.observe(el);
   });
-</script>
 
+  // Hamburger
+  const hamburger = document.getElementById('js-hamburger');
+  const mobileNav = document.getElementById('js-mobile-nav');
+
+  function openMenu() {
+    hamburger.classList.add('open');
+    mobileNav.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>
 </body>
 </html>
